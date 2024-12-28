@@ -4,11 +4,11 @@
     android:initialKeyguardLayout="@layout/portfolio_widget"
     android:initialLayout="@layout/portfolio_widget"
     android:minWidth="250dp"
-    android:minHeight="180dp"
+    android:minHeight="120dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:previewLayout="@layout/portfolio_widget"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="4"
-    android:targetCellHeight="3"
+    android:targetCellHeight="2"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen" />
