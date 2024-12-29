@@ -1,9 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_background/flutter_background.dart';
 import 'package:home_widget/home_widget.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize background execution
+  await FlutterBackground.initialize();
+
   runApp(const HomePage());
 }
 
@@ -27,6 +32,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    // Start background execution
+    FlutterBackground.enableBackgroundExecution();
+
+    // Set periodic updates
     Timer.periodic(Duration(milliseconds: 100), (timer) {
       setState(() {
         portfolioValue += 0.1;
@@ -44,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void updateAndroidWidget() {
+    // Save updated values to widget data
     HomeWidget.saveWidgetData(
         "portfolioValue", portfolioValue.toStringAsFixed(2));
     HomeWidget.saveWidgetData(
@@ -60,9 +71,17 @@ class _HomePageState extends State<HomePage> {
     HomeWidget.saveWidgetData(
         "realisedPNLPercent", realisedPNLPercent.toStringAsFixed(2));
 
+    // Update the widget
     HomeWidget.updateWidget(
       androidName: "PortfolioWidget",
     );
+  }
+
+  @override
+  void dispose() {
+    // Clean up any resources
+    // FlutterBackground.disableBackgroundExecution();
+    super.dispose();
   }
 
   @override
